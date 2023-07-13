@@ -52,7 +52,7 @@ public class EnterGui extends JFrame {
     }
 
 
-    public void confirmButton() {
+    public String confirmButton() {
         btnNewButton = new JButton("입장");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -61,5 +61,6 @@ public class EnterGui extends JFrame {
         btnNewButton.setBounds(100, 134, 97, 23);
         contentPane.add(btnNewButton);
     }
+
 
 }
