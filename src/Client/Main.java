@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         EnterGui E = new EnterGui();
         E.setVisible(true);
+        System.out.println(3);
         // 상속이라 가능
         // 패널을 만들어서 붙여주면 좋음
 
