@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+
 import Server.ReceptionMsgThread;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
@@ -61,7 +63,6 @@ public class Server {
         }catch (IOException e){
             e.printStackTrace();
         }
-
     }
     public void close(){
         try {
