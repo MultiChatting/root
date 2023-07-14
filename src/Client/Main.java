@@ -1,6 +1,8 @@
 package Client;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -17,9 +19,25 @@ public class Main {
         }
 
         String name = enterGui.getName();
-        System.out.println(name);
+//        System.out.println(name);
         // ID:qwdqwda ID 전달
-
+        String id = "ID:" + name;
+        System.out.println(id);
     }
+    private void sendIDToServer(String id) {
+        // 서버와의 통신을 위한 코드 작성
+        try {
+            Socket socket = new Socket("서버 IP 주소", 8888);
+            OutputStream outputStream = socket.getOutputStream();
+            outputStream.write(id.getBytes());
+            outputStream.flush();
+            outputStream.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
 
