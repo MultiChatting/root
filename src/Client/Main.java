@@ -5,6 +5,8 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         EnterGui E = new EnterGui();
+        String name = E.getName();
+        System.out.println(name);
 //        System.out.println(E.enterButton());
         // 상속이라 가능
         // 패널을 만들어서 붙여주면 좋음

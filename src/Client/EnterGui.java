@@ -16,6 +16,8 @@ public class EnterGui extends JFrame {
     private JTextField textField; // 이벤트 처리
     private JButton btnNewButton; // 이벤트 처리
 
+    private String name; // 값 반환
+
     /**
      * Create the frame.
      */
@@ -24,6 +26,7 @@ public class EnterGui extends JFrame {
         nickName();
         enterButton();
         setVisible(true);
+
     }
 
     public void windowPanel() {
@@ -54,10 +57,21 @@ public class EnterGui extends JFrame {
         btnNewButton = new JButton("입장");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                name = textField.getText();
+                if (!name.isEmpty()) {
+                    // 텍스트 필드에 값이 입력되어 있을 때
+                    // name 변수에 입력된 값이 들어갑니다.
+                    // 이후 필요한 처리를 수행할 수 있습니다.
+                }
             }
         });
         btnNewButton.setBounds(100, 134, 97, 23);
         contentPane.add(btnNewButton);
+    }
+
+    public String getName() {
+        return name;
     }
 
 
