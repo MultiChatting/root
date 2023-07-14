@@ -14,8 +14,6 @@ public class EnterGui extends JFrame {
 
     private JPanel contentPane; // 이벤트 처리
     private JTextField textField; // 이벤트 처리
-    private JTextField textField_1; // 이벤트 처리
-    private JLabel jblNewLabel; // 멤버필드 분리를 위해서 예시로 사용
     private JButton btnNewButton; // 이벤트 처리
 
     /**
@@ -23,9 +21,9 @@ public class EnterGui extends JFrame {
      */
     public EnterGui() {
         windowPanel();
-        accountNum();
-        confirmButton();
-
+        nickName();
+        enterButton();
+        setVisible(true);
     }
 
     public void windowPanel() {
@@ -40,19 +38,19 @@ public class EnterGui extends JFrame {
         contentPane.setLayout(null);
     }
 
-    public void accountNum() {
-        JLabel jlblNewLabel_1 = new JLabel("닉네임 입력");
-        jlblNewLabel_1.setBounds(100, 59, 80, 15);
-        contentPane.add(jlblNewLabel_1);
+    public void nickName() {
+        JLabel jlblNewLabel = new JLabel("닉네임 입력");
+        jlblNewLabel.setBounds(100, 59, 80, 15);
+        contentPane.add(jlblNewLabel);
 
-        textField_1 = new JTextField();
-        textField_1.setBounds(89, 76, 116, 21);
-        contentPane.add(textField_1);
-        textField_1.setColumns(10);
+        textField = new JTextField();
+        textField.setBounds(89, 76, 116, 21);
+        contentPane.add(textField);
+        textField.setColumns(10);
     }
 
 
-    public String confirmButton() {
+    public void enterButton() {
         btnNewButton = new JButton("입장");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
