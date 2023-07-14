@@ -1,18 +1,22 @@
 package Server;
 
+import Model.User;
+
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class ServerGui {
     private JFrame serverFrame;
     private TextArea chatTextArea;
-    private TextField chatTextField;
+    public TextField chatTextField;
+    private JList list;
     public ServerGui(){
 
         serverFrame = new JFrame();
         serverFrame.setDefaultCloseOperation(serverFrame.EXIT_ON_CLOSE);
-        serverFrame.setBounds(100, 100, 822, 475);
+        serverFrame.setBounds(100, 100, 825, 475);
 
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -23,6 +27,7 @@ public class ServerGui {
         chatTextArea = new TextArea();
         chatTextArea.setEditable(false);
         chatTextArea.setBounds(18,12,567,384);
+        chatTextArea.setBackground(Color.WHITE);
         contentPane.add(chatTextArea);
 
         chatTextField = new TextField();
@@ -31,16 +36,16 @@ public class ServerGui {
         contentPane.add(chatTextField);
 
 
-        Label userListLabel = new Label("채팅 유저 목록");
-        userListLabel.setBounds(679, 16, 61, 16);
+        Label userListLabel = new Label("CHAT USER ");
+        userListLabel.setBounds(667, 16, 70, 16);
         contentPane.add(userListLabel);
 
-        TextArea userListTextArea = new TextArea();
-        userListTextArea.setEditable(false);
-        userListTextArea.setBounds(613, 42, 192, 370);
-        contentPane.add(userListTextArea);
+        DefaultListModel<User> model = new DefaultListModel<>();
 
-        chatTextField.addKeyListener(new Event(this));  // 엔터 이벤트
+        list = new JList(model);
+        list.setBounds(602, 41, 199, 373);
+        list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        contentPane.add(list);
 
         serverFrame.setVisible(true);
 
@@ -56,6 +61,9 @@ public class ServerGui {
 
     public void appendMessage(String Message){
         chatTextArea.append(Message + "\n");
+    }
+
+    public void appendName(String name){
     }
 
     public String getChatMessage(){ return chatTextField.getText(); }
