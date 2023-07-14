@@ -1,3 +1,5 @@
+package Client;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -7,23 +9,14 @@ public class ChatGui extends JFrame {
     private JPanel contentPane;
     private JTextField textField;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                ChatGui frame = new ChatGui();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        ChatGui frame = new ChatGui();
+//        frame.setVisible(true);
+//    }
 
-    /**
-     * Create the frame.
-     */
+    //ChatGui chat = new ChatGui();
+    //chat.setVisible(true);
+
     public ChatGui() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 700, 500);
