@@ -1,4 +1,4 @@
-import Client.EnterGui;
+package Server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +16,7 @@ public class Server {
     private Socket clientSocket;
     private BufferedReader reader;
     private PrintWriter writer;
+    private ServerGui serverGui;
 
     public Server() {
         this.start();
@@ -25,18 +26,19 @@ public class Server {
 
     public static void main(String[] args) {
         new Server();
-
     } //main
-
     public void start() {
         try {
+            //GUI 켜기
+            serverGui = new ServerGui();
+
             // 서버 소켓 생성
             serverSocket = new ServerSocket(8888);
-            System.out.println("서버가 시작되었습니다.");
+            serverGui.appendMessage("서버가 시작 되었습니다");
 
             // 클라이언트 연결 대기
             clientSocket = serverSocket.accept();
-            System.out.println("클라이언트가 연결되었습니다.");
+            serverGui.appendMessage("클라이언트가 연결되었습니다.");
 
             // 클라이언트와 입출력 스트림 생성
             reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -45,7 +47,7 @@ public class Server {
             writer.println("서버에 연결 됐습니다"); //클라이언트에 연결 사실 전송
 
             // 클라이언트로부터 메시지 수신 및 콘솔에 출력
-            Thread receiveThread = new Thread(new ReceptionMsgThread(reader));
+            Thread receiveThread = new Thread(new ReceptionMsgThread(serverGui, reader));
             receiveThread.start();
         } catch (Exception e) {
             e.printStackTrace();

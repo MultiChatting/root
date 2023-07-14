@@ -5,19 +5,19 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class ServerGui {
-    private JFrame clientFrame;
+    private JFrame serverFrame;
     private TextArea chatTextArea;
     private TextField chatTextField;
     public ServerGui(){
 
-        clientFrame = new JFrame();
-        clientFrame.setDefaultCloseOperation(clientFrame.EXIT_ON_CLOSE);
-        clientFrame.setBounds(100, 100, 822, 475);
+        serverFrame = new JFrame();
+        serverFrame.setDefaultCloseOperation(serverFrame.EXIT_ON_CLOSE);
+        serverFrame.setBounds(100, 100, 822, 475);
 
         JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        clientFrame.setContentPane(contentPane);
+        serverFrame.setContentPane(contentPane);
         contentPane.setLayout(null);
 
         chatTextArea = new TextArea();
@@ -40,13 +40,14 @@ public class ServerGui {
         userListTextArea.setBounds(613, 42, 192, 370);
         contentPane.add(userListTextArea);
 
+        chatTextField.addKeyListener(new Event(this));  // 엔터 이벤트
 
-//        chatTextField.addKeyListener();  // 엔터 이벤트
+        serverFrame.setVisible(true);
 
     }
 
     public void setFrameVisible(){
-        clientFrame.setVisible(true);
+        serverFrame.setVisible(true);
     }
 
     public void setTextFieldBlank(){
