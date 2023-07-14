@@ -25,7 +25,6 @@ public class EnterGui extends JFrame {
         windowPanel();
         nickName();
         enterButton();
-        setVisible(true);
 
     }
 
@@ -34,7 +33,7 @@ public class EnterGui extends JFrame {
         setBounds(100, 100, 450, 300); // 패널 사이즈 코드
         contentPane = new JPanel();
         contentPane.setBackground(SystemColor.info);
-        contentPane.setForeground(new Color(255, 255, 128));
+        contentPane.setForeground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
@@ -57,13 +56,8 @@ public class EnterGui extends JFrame {
         btnNewButton = new JButton("입장");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
                 name = textField.getText();
-                if (!name.isEmpty()) {
-                    // 텍스트 필드에 값이 입력되어 있을 때
-                    // name 변수에 입력된 값이 들어갑니다.
-                    // 이후 필요한 처리를 수행할 수 있습니다.
-                }
+                setVisible(false);
             }
         });
         btnNewButton.setBounds(100, 134, 97, 23);
