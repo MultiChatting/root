@@ -31,7 +31,7 @@ public class ServerGui {
         contentPane.add(chatTextField);
 
 
-        Label userListLabel = new Label("유저 목록");
+        Label userListLabel = new Label("채팅 유저 목록");
         userListLabel.setBounds(679, 16, 61, 16);
         contentPane.add(userListLabel);
 
@@ -41,7 +41,7 @@ public class ServerGui {
         contentPane.add(userListTextArea);
 
 
-        chatTextField.addKeyListener();  // 엔터 이벤트
+//        chatTextField.addKeyListener();  // 엔터 이벤트
 
     }
 

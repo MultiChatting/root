@@ -25,7 +25,7 @@ public class Server {
 
     public static void main(String[] args) {
         new Server();
-        new ServerGui().setFrameVisible();
+
     } //main
 
     public void start() {
