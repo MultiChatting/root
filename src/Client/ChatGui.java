@@ -5,6 +5,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 public class ChatGui extends JFrame {
 
@@ -46,6 +50,29 @@ public class ChatGui extends JFrame {
                     //엔터키 눌렸을때 실행될 코드
                     String text = textField.getText();
                     System.out.println(text);   //출력되는지 콘솔에 테스트
+
+                    // text값 소켓통신으로 서버로 전송하는 코드
+                    // 서버 정보
+                    String serverIP = "localhost";
+                    int serverPort = 8888; // 서버 포트 번호
+
+                    try {
+                        // 서버에 연결
+                        Socket socket = new Socket(serverIP, serverPort);
+
+                        // 서버로 데이터 전송
+                        OutputStream outputStream = socket.getOutputStream();
+                        PrintWriter writer = new PrintWriter(outputStream, true);
+                        writer.println(text); // 텍스트를 서버로 전송
+
+                        // 연결 종료
+                        writer.close();
+                        outputStream.close();
+                        socket.close();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
                     textField.setText(""); // 텍스트 필드의 값을 지움
                 }
             }

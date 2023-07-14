@@ -27,7 +27,7 @@ public class Main {
     private void sendIDToServer(String id) {
         // 서버와의 통신을 위한 코드 작성
         try {
-            Socket socket = new Socket("서버 IP 주소", 8888);
+            Socket socket = new Socket("localhost", 8888);
             OutputStream outputStream = socket.getOutputStream();
             outputStream.write(id.getBytes());
             outputStream.flush();
