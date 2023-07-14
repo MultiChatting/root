@@ -12,6 +12,7 @@ public class ServerGui {
     private TextArea chatTextArea;
     public TextField chatTextField;
     private JList list;
+    private DefaultListModel model;
     public ServerGui(){
 
         serverFrame = new JFrame();
@@ -37,10 +38,10 @@ public class ServerGui {
 
 
         Label userListLabel = new Label("CHAT USER ");
-        userListLabel.setBounds(667, 16, 70, 16);
+        userListLabel.setBounds(667, 16, 100, 16);
         contentPane.add(userListLabel);
 
-        DefaultListModel<User> model = new DefaultListModel<>();
+        model = new DefaultListModel();
 
         list = new JList(model);
         list.setBounds(602, 41, 199, 373);
@@ -59,12 +60,14 @@ public class ServerGui {
         chatTextField.setText(null);
     }
 
-    public void appendMessage(String Message){
-        chatTextArea.append(Message + "\n");
+    public void appendMessage(String message){
+        chatTextArea.append(message + "\n");
     }
-
-    public void appendName(String name){
+    public void appendUserList(String user){
+        model.addElement(user);
     }
-
+    public void removeUserList(String user){
+        model.removeElement(user);
+    }
     public String getChatMessage(){ return chatTextField.getText(); }
 }

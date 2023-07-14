@@ -40,7 +40,7 @@ public class Server {
                 ChatThread chatthread = new ChatThread();
                 chatlist.add(chatthread);
                 serverGui.appendMessage("클라이언트가 연결되었습니다." + "(IP" + clientSocket.getInetAddress() + ")");
-                serverGui.appendName(chatthread.getName()); // 유저 목록에 이름넣기
+                serverGui.appendUserList(chatthread.getName());
                 chatthread.start();
             }
 
@@ -86,6 +86,7 @@ public class Server {
             } catch (IOException e) {
                 //클라이언트와 연결이 끊어짐
                 chatlist.remove(this);
+                serverGui.removeUserList(this.getName());
                 serverGui.appendMessage("ChatThread Class run() IOException");
             }
         }
