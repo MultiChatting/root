@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+
+import Server.ServerGui;
 
 import Server.ReceptionMsgThread;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 public class Server {
     private ServerSocket serverSocket;
@@ -17,17 +17,19 @@ public class Server {
     private BufferedReader reader;
     private PrintWriter writer;
 
-    public Server(){
+    public Server() {
         this.start();
         this.send();
         this.close();
     }
+
     public static void main(String[] args) {
         new Server();
+        new ServerGui().setFrameVisible();
     } //main
 
-    public void start(){
-        try{
+    public void start() {
+        try {
             // 서버 소켓 생성
             serverSocket = new ServerSocket(8888);
             System.out.println("서버가 시작되었습니다.");
@@ -45,14 +47,13 @@ public class Server {
             // 클라이언트로부터 메시지 수신 및 콘솔에 출력
             Thread receiveThread = new Thread(new ReceptionMsgThread(reader));
             receiveThread.start();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        // 연결 종료
 
     }
-    public void send(){
 
+    public void send() {
         try {
             // 콘솔에서 입력받은 메시지를 클라이언트로 전송
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
@@ -60,17 +61,18 @@ public class Server {
             while ((consoleInput = consoleReader.readLine()) != null) {
                 writer.println(consoleInput);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void close(){
+
+    public void close() {
         try {
             reader.close();
             writer.close();
             clientSocket.close();
             serverSocket.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
