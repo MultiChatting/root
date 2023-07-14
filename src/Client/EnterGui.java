@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.PrintWriter;
 
 public class EnterGui extends JFrame {
 
@@ -17,6 +18,7 @@ public class EnterGui extends JFrame {
     private JButton btnNewButton; // 이벤트 처리
 
     private String name; // 값 반환
+
 
     /**
      * Create the frame.
@@ -58,6 +60,7 @@ public class EnterGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 name = textField.getText();
                 setVisible(false);
+
             }
         });
         btnNewButton.setBounds(100, 134, 97, 23);

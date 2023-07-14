@@ -1,13 +1,15 @@
 package Client;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class Main {
+
+    private static PrintWriter writer;
     public static void main(String[] args) throws IOException {
         EnterGui enterGui = new EnterGui();
         enterGui.setVisible(true);
+
 
         // EnterGui 창이 닫힐 때까지 기다린 후 name 값을 받습니다.
         while (enterGui.isVisible()) {
@@ -19,25 +21,33 @@ public class Main {
         }
 
         String name = enterGui.getName();
-//        System.out.println(name);
-        // ID:qwdqwda ID 전달
-        String id = "ID:" + name;
-        System.out.println(id);
+        String id = "login/" + name;
+        sendIDToServer(id);
+
     }
-    private void sendIDToServer(String id) {
-        // 서버와의 통신을 위한 코드 작성
+    private static void sendIDToServer(String id) {
+
         try {
-            Socket socket = new Socket("서버 IP 주소", 8888);
-            OutputStream outputStream = socket.getOutputStream();
-            outputStream.write(id.getBytes());
-            outputStream.flush();
-            outputStream.close();
+            Socket socket = new Socket("192.168.0.17", 8888);
+
+            writer = new PrintWriter(socket.getOutputStream(), true);
+            writer.println(id);
+            InputStream inputStream = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+//                writer.println(line);
+                System.out.println(line);
+            }
+            reader.close();
+            inputStream.close();
+            writer.close();
             socket.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
 }
 
