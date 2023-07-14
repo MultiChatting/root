@@ -3,19 +3,20 @@ package Client;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class ChatGui extends JFrame {
 
     private JPanel contentPane;
     private JTextField textField;
 
-//    public static void main(String[] args) {
-//        ChatGui frame = new ChatGui();
-//        frame.setVisible(true);
-//    }
+    public static void main(String[] args) {
+        ChatGui frame = new ChatGui();
+        frame.setVisible(true);
+    }
 
-    //ChatGui chat = new ChatGui();
-    //chat.setVisible(true);
+
 
     public ChatGui() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,6 +33,29 @@ public class ChatGui extends JFrame {
         panel.setLayout(null);
 
         textField = new JTextField();
+        //엔터키 이벤트 처리
+        textField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    //엔터키 눌렸을때 실행될 코드
+                    String text = textField.getText();
+                    System.out.println(text);   //출력되는지 콘솔에 테스트
+                    textField.setText(""); // 텍스트 필드의 값을 지움
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+
         textField.setText("메세지를 입력하세요");
         textField.setBounds(12, 429, 661, 21);
         panel.add(textField);
