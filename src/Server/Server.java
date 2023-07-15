@@ -29,7 +29,7 @@ public class Server {
             //GUI 켜기
             serverGui = new ServerGui();
 
-            //GUI에 이벤트 추가(서버에 전달을 위해 서버 클래스에서 추가)
+            //GUI에 이벤트 추가(서버에 전달을 위해 서버 클래스에서 추가
             serverGui.chatTextField.addKeyListener(new Event(this, serverGui));
 
             // 서버 소켓 생성

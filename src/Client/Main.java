@@ -28,7 +28,7 @@ public class Main {
     private static void sendIDToServer(String id) {
 
         try {
-            Socket socket = new Socket("192.168.0.17", 8888);
+            Socket socket = new Socket("localhost", 8888);
 
             writer = new PrintWriter(socket.getOutputStream(), true);
             writer.println(id);

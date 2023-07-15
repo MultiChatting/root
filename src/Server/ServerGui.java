@@ -48,6 +48,8 @@ public class ServerGui {
         list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         contentPane.add(list);
 
+        serverFrame.setResizable(false);
+        serverFrame.setTitle("진짜 채팅프로그램 서버");
         serverFrame.setVisible(true);
 
     }
