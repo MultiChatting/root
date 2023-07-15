@@ -16,7 +16,7 @@ public class Event implements KeyListener{
             String s = serverGui.getChatMessage().trim();// 앞뒤 공백제거
             if(!s.isEmpty()){ // 비어있지 않은 경우에만 추가
                 serverGui.appendMessage("SERVER : " + s);
-                server.sendToAll(s);
+                server.sendToAll("server : " + s);
             }
             serverGui.setTextFieldBlank();
         }
