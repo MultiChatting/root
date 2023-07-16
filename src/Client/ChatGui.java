@@ -21,7 +21,6 @@ public class ChatGui extends JFrame {
     }
 
 
-
     public ChatGui() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 700, 500);
@@ -46,7 +45,7 @@ public class ChatGui extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     //엔터키 눌렸을때 실행될 코드
                     String text = textField.getText();
                     System.out.println(text);   //출력되는지 콘솔에 테스트
