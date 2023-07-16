@@ -2,6 +2,8 @@ package Server;
 
 import Model.User;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,22 +17,41 @@ public class Server {
     private Socket clientSocket;
     private ServerGui serverGui;
     ArrayList<ChatThread> chatlist = new ArrayList<ChatThread>();
-
-    public Server() {
-        this.start();
-    }
-
     public static void main(String[] args) {
         new Server();
-    } //main
-
+    } //메인
+    public Server() {
+        this.start();
+    } //생성자
     public void start() {
         try {
             //GUI 켜기
             serverGui = new ServerGui();
 
-            //GUI에 이벤트 추가(서버에 전달을 위해 서버 클래스에서 추가
-            serverGui.chatTextField.addKeyListener(new Event(this, serverGui));
+            //GUI에 이벤트 추가
+            serverGui.chatTextField.addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER){
+                        String s = serverGui.getChatMessage().trim();// 앞뒤 공백제거
+                        if(!s.isEmpty()){ // 비어있지 않은 경우에만 추가
+                            serverGui.appendMessage("SERVER : " + s);
+                            sendToAll("server : " + s);
+                        }
+                        serverGui.setTextFieldBlank();
+                    }
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+
+                }
+            });
 
             // 서버 소켓 생성
             serverSocket = new ServerSocket(8888);
