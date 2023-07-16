@@ -152,6 +152,7 @@ public class MultiChatClient implements ActionListener, Runnable {
         if (obj == exitButton) {
             outMsg.println(".quit");
             jframe.dispose();
+            System.exit(0);
         }
         // 로그인 버튼 클릭
         else if (obj == loginButton) {
