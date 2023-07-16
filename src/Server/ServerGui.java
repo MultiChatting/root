@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class ServerGui {
     private JFrame serverFrame;
@@ -51,6 +53,7 @@ public class ServerGui {
         serverFrame.setResizable(false);
         serverFrame.setTitle("진짜 채팅프로그램 서버");
         serverFrame.setVisible(true);
+
 
     }
 

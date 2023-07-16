@@ -88,16 +88,17 @@ public class Server {
                         serverGui.appendUserList(user.getId());
                     } else if (msg.equals(".quit")) { //로그아웃 처리
                         sendToAll("server : " + user.getId() + "님이 나갔습니다");
-                        serverGui.removeUserList(user.getId());
-                        chatlist.remove(this);
+                        serverGui.appendMessage(user.getId() + "님이 나갔습니다");
                         loginBool = false;
                     } else {
                         sendToAll(msg); // 모든 클라이언트에 클라이언트의 메세지 전송
                     }
                 }
                 //클라이언트 챗스레드 종료
-                this.interrupt();
+                chatlist.remove(this);
+                serverGui.removeUserList(user.getId());
                 serverGui.appendMessage(this.getName() + " stopped!");
+                this.interrupt();
             } catch (IOException e) {
                 //클라이언트와 연결이 끊어짐
                 serverGui.appendMessage("클라이언트 " + user.getId() + "의 연결이 끊어졌습니다");
