@@ -104,6 +104,7 @@ public class MultiChatClient implements ActionListener, Runnable {
 
         // 메인 프레임 생성
         jframe = new JFrame("::멀티챗::");
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         msgOut = new JTextArea("", 10, 30);
         // JTextArea는 편집이 불가능하도록 설정
         msgOut.setEditable(false);
@@ -148,11 +149,12 @@ public class MultiChatClient implements ActionListener, Runnable {
     public void actionPerformed(ActionEvent arg0) {
         Object obj = arg0.getSource();
 
-        // 종료 버튼 클릭
+        // 전송 버튼 클릭
         if (obj == exitButton) {
-            outMsg.println(".quit");
-            jframe.dispose();
-            System.exit(0);
+            // 메시지 전송
+            outMsg.println(msgInput.getText());
+            // 입력 필드 초기화
+            msgInput.setText("");
         }
         // 로그인 버튼 클릭
         else if (obj == loginButton) {

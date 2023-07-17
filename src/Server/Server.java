@@ -123,6 +123,7 @@ public class Server {
             } catch (IOException e) {
                 //클라이언트와 연결이 끊어짐
                 serverGui.appendMessage("클라이언트 " + user.getId() + "의 연결이 끊어졌습니다");
+                serverGui.appendMessage(this.getName() + " stopped!");
                 serverGui.removeUserList(user.getId());
                 chatlist.remove(this);
             }
