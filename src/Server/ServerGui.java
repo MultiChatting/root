@@ -12,7 +12,7 @@ import java.awt.event.WindowListener;
 public class ServerGui {
     private JFrame serverFrame;
     private TextArea chatTextArea;
-    public TextField chatTextField;
+    protected TextField chatTextField;
     private JList list;
     private DefaultListModel model;
     public ServerGui(){
