@@ -9,14 +9,14 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.PrintWriter;
+import java.io.*;
+import java.net.Socket;
 
 public class EnterGui extends JFrame {
 
     private JPanel contentPane; // 이벤트 처리
     private JTextField textField; // 이벤트 처리
     private JButton btnNewButton; // 이벤트 처리
-
     private String name; // 값 반환
 
 
@@ -27,6 +27,7 @@ public class EnterGui extends JFrame {
         windowPanel();
         nickName();
         enterButton();
+        setVisible(true);
 
     }
 
@@ -58,9 +59,12 @@ public class EnterGui extends JFrame {
         btnNewButton = new JButton("입장");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 name = textField.getText();
                 setVisible(false);
-
+                sendIDToServer(name);
+//                System.out.println(name);
+//                new ChatGui();
             }
         });
         btnNewButton.setBounds(100, 134, 97, 23);
@@ -69,6 +73,30 @@ public class EnterGui extends JFrame {
 
     public String getName() {
         return name;
+    }
+
+    private void sendIDToServer(String id) {
+        String msg = "login/" + id;
+        try {
+            Socket socket = new Socket("localhost", 8888);
+
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            writer.println(msg);
+            InputStream inputStream = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+//                writer.println(line);
+                System.out.println(line);
+            }
+            reader.close();
+            inputStream.close();
+            writer.close();
+            socket.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
