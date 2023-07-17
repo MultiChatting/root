@@ -15,13 +15,34 @@ public class ChatGui extends JFrame {
     private JPanel contentPane;
     private JTextField textField;
 
-    public static void main(String[] args) {
+    public PrintWriter writer = null;
+
+
+    public static void main(String[] args) throws IOException {
         ChatGui frame = new ChatGui();
         frame.setVisible(true);
     }
 
-
     public ChatGui() {
+//        PrintWriter writer = null;
+
+        try {
+            // text값 소켓통신으로 서버로 전송하는 코드
+            // 서버 정보
+            String serverIP = "localhost";
+            int serverPort = 8888; // 서버 포트 번호
+
+            // 서버에 연결
+            Socket socket = new Socket(serverIP, serverPort);
+
+            // 서버로 데이터 전송
+            OutputStream outputStream = socket.getOutputStream();
+            writer = new PrintWriter(outputStream, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 700, 500);
         contentPane = new JPanel();
@@ -49,29 +70,7 @@ public class ChatGui extends JFrame {
                     //엔터키 눌렸을때 실행될 코드
                     String text = textField.getText();
                     System.out.println(text);   //출력되는지 콘솔에 테스트
-
-                    // text값 소켓통신으로 서버로 전송하는 코드
-                    // 서버 정보
-                    String serverIP = "localhost";
-                    int serverPort = 8888; // 서버 포트 번호
-
-                    try {
-                        // 서버에 연결
-                        Socket socket = new Socket(serverIP, serverPort);
-
-                        // 서버로 데이터 전송
-                        OutputStream outputStream = socket.getOutputStream();
-                        PrintWriter writer = new PrintWriter(outputStream, true);
-                        writer.println(text); // 텍스트를 서버로 전송
-
-                        // 연결 종료
-                        writer.close();
-                        outputStream.close();
-                        socket.close();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-
+                    writer.println(text);// 텍스트를 서버로 전송
                     textField.setText(""); // 텍스트 필드의 값을 지움
                 }
             }
@@ -100,5 +99,7 @@ public class ChatGui extends JFrame {
         textArea_1.setText("접속 인원");
         textArea_1.setBounds(534, 26, 139, 393);
         panel.add(textArea_1);
+
+
     }
 }
