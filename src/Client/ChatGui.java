@@ -18,14 +18,13 @@ public class ChatGui extends JFrame {
     public PrintWriter writer = null;
 
 
-    public static void main(String[] args) throws IOException {
-        ChatGui frame = new ChatGui();
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) throws IOException {
+//        ChatGui frame = new ChatGui();
+//    }
 
-    public ChatGui() {
+    public ChatGui(String id) {
 //        PrintWriter writer = null;
-
+        String msg = "login/" + id;
         try {
             // text값 소켓통신으로 서버로 전송하는 코드
             // 서버 정보
@@ -38,6 +37,7 @@ public class ChatGui extends JFrame {
             // 서버로 데이터 전송
             OutputStream outputStream = socket.getOutputStream();
             writer = new PrintWriter(outputStream, true);
+            writer.println(msg);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -99,7 +99,7 @@ public class ChatGui extends JFrame {
         textArea_1.setText("접속 인원");
         textArea_1.setBounds(534, 26, 139, 393);
         panel.add(textArea_1);
-
+        setVisible(true);
 
     }
 }
