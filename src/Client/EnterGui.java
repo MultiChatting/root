@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.*;
 import java.net.Socket;
 
@@ -52,6 +54,25 @@ public class EnterGui extends JFrame {
         textField.setBounds(155, 76, 116, 21);
         contentPane.add(textField);
         textField.setColumns(10);
+        textField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    name = textField.getText();
+                    setVisible(false);
+                    new ChatGui(name);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
     }
 
 
@@ -63,41 +84,11 @@ public class EnterGui extends JFrame {
                 name = textField.getText();
                 setVisible(false);
                 new ChatGui(name);
-//                System.out.println(name);
-//                new ChatGui();
             }
         });
         btnNewButton.setBounds(165, 134, 97, 23);
         contentPane.add(btnNewButton);
     }
-
-//    public String getName() {
-//        return name;
-//    }
-
-//    private void sendIDToServer(String id) {
-//        String msg = "login/" + id;
-//        try {
-//            Socket socket = new Socket("localhost", 8888);
-//
-//            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-//            writer.println(msg);
-//            InputStream inputStream = socket.getInputStream();
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//            String line;
-////            while ((line = reader.readLine()) != null) {
-//////                writer.println(line);
-////                System.out.println(line);
-////            }
-//            reader.close();
-//            inputStream.close();
-//            writer.close();
-//            socket.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 
 }
