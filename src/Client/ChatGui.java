@@ -12,7 +12,7 @@ public class ChatGui extends JFrame {
 
     private JPanel contentPane;
     private JTextField textField;
-    private JTextArea textArea;
+    private TextArea textArea;
     private BufferedReader reader;
     public PrintWriter writer = null;
 
@@ -41,7 +41,8 @@ public class ChatGui extends JFrame {
         lblNewLabel.setBounds(240, 10, 97, 15);
         panel.add(lblNewLabel);
 
-        textArea = new JTextArea();
+        textArea = new TextArea();
+        textArea.setEditable(false);
         textArea.setText("채팅 로그입니다.");
         textArea.setBounds(12, 26, 510, 393);
         panel.add(textArea);
