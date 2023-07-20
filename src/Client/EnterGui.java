@@ -54,6 +54,8 @@ public class EnterGui extends JFrame {
         textField.setBounds(155, 76, 116, 21);
         contentPane.add(textField);
         textField.setColumns(10);
+
+        // 엔터 입장 처리
         textField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -79,6 +81,7 @@ public class EnterGui extends JFrame {
     public void enterButton() {
         btnNewButton = new JButton("입장");
         btnNewButton.addActionListener(new ActionListener() {
+            // 버튼 클릭처리
             public void actionPerformed(ActionEvent e) {
 
                 name = textField.getText();

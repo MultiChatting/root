@@ -85,7 +85,7 @@ public class ChatGui extends JFrame {
         try {
             // text값 소켓통신으로 서버로 전송하는 코드
             // 서버 정보
-            String serverIP = "localhost";
+            String serverIP = "192.168.0.17";
             int serverPort = 8888; // 서버 포트 번호
 
             // 서버에 연결
