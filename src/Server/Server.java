@@ -112,7 +112,7 @@ public class Server {
                         serverGui.appendMessage(user.getId() + "님이 나갔습니다");
                         loginBool = false;
                     } else {
-                        sendToAll(user.getId() + ":" + msg); // 모든 클라이언트에 클라이언트의 메세지 전송
+                        sendToAll(user.getId() + " : " + msg); // 모든 클라이언트에 클라이언트의 메세지 전송
                     }
                 }
                 //클라이언트 챗스레드 종료

@@ -25,7 +25,7 @@ public class ChatGui extends JFrame {
         String msg = "login/" + id;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 700, 500);
+        setBounds(100, 100, 550, 500);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -37,8 +37,8 @@ public class ChatGui extends JFrame {
         contentPane.add(panel);
         panel.setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("채팅방 입장");
-        lblNewLabel.setBounds(280, 10, 97, 15);
+        JLabel lblNewLabel = new JLabel("채팅방");
+        lblNewLabel.setBounds(240, 10, 97, 15);
         panel.add(lblNewLabel);
 
         textArea = new JTextArea();
@@ -46,14 +46,14 @@ public class ChatGui extends JFrame {
         textArea.setBounds(12, 26, 510, 393);
         panel.add(textArea);
 
-        JTextArea textArea_1 = new JTextArea();
-        textArea_1.setText("접속 인원");
-        textArea_1.setBounds(534, 26, 139, 393);
-        panel.add(textArea_1);
+//        JTextArea textArea_1 = new JTextArea();
+//        textArea_1.setText("접속 인원");
+//        textArea_1.setBounds(534, 26, 139, 393);
+//        panel.add(textArea_1);
 
         textField = new JTextField();
         textField.setText("메세지를 입력하세요");
-        textField.setBounds(12, 429, 661, 21);
+        textField.setBounds(12, 429, 510, 21);
         panel.add(textField);
         textField.setColumns(10);
         //엔터키 이벤트 처리
