@@ -90,7 +90,6 @@ public class ChatGui extends JFrame {
 
             // 서버에 연결
             Socket socket = new Socket(serverIP, serverPort);
-
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             // 서버로부터 메시지를 읽는 스레드 시작

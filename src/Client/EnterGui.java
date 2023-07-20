@@ -45,11 +45,11 @@ public class EnterGui extends JFrame {
 
     public void nickName() {
         JLabel jlblNewLabel = new JLabel("닉네임 입력");
-        jlblNewLabel.setBounds(100, 59, 80, 15);
+        jlblNewLabel.setBounds(180, 59, 80, 15);
         contentPane.add(jlblNewLabel);
 
         textField = new JTextField();
-        textField.setBounds(89, 76, 116, 21);
+        textField.setBounds(155, 76, 116, 21);
         contentPane.add(textField);
         textField.setColumns(10);
     }
@@ -67,7 +67,7 @@ public class EnterGui extends JFrame {
 //                new ChatGui();
             }
         });
-        btnNewButton.setBounds(100, 134, 97, 23);
+        btnNewButton.setBounds(165, 134, 97, 23);
         contentPane.add(btnNewButton);
     }
 
