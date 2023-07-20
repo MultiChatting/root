@@ -11,10 +11,10 @@ import java.net.Socket;
 public class ChatGui extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textField;
-    private TextArea textArea;
+    private JTextField textmsg;   //textmsg
+    private TextArea chatlog;  //textArea
     private BufferedReader reader;
-    public PrintWriter writer = null;
+    public PrintWriter writer;
 
 
 //    public static void main(String[] args) throws IOException {
@@ -41,24 +41,19 @@ public class ChatGui extends JFrame {
         lblNewLabel.setBounds(240, 10, 97, 15);
         panel.add(lblNewLabel);
 
-        textArea = new TextArea();
-        textArea.setEditable(false);
-        textArea.setText("채팅 로그입니다.");
-        textArea.setBounds(12, 26, 510, 393);
-        panel.add(textArea);
+        chatlog = new TextArea();
+        chatlog.setEditable(false);
+        chatlog.setText("채팅 로그입니다.");
+        chatlog.setBounds(12, 26, 510, 393);
+        panel.add(chatlog);
 
-//        JTextArea textArea_1 = new JTextArea();
-//        textArea_1.setText("접속 인원");
-//        textArea_1.setBounds(534, 26, 139, 393);
-//        panel.add(textArea_1);
-
-        textField = new JTextField();
-        textField.setText("메세지를 입력하세요");
-        textField.setBounds(12, 429, 510, 21);
-        panel.add(textField);
-        textField.setColumns(10);
+        textmsg = new JTextField();
+        textmsg.setText("메세지를 입력하세요");
+        textmsg.setBounds(12, 429, 510, 21);
+        panel.add(textmsg);
+        textmsg.setColumns(10);
         //엔터키 이벤트 처리
-        textField.addKeyListener(new KeyListener() {
+        textmsg.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
 
@@ -68,10 +63,10 @@ public class ChatGui extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     //엔터키 눌렸을때 실행될 코드
-                    String text = textField.getText();
+                    String text = textmsg.getText();
                     //System.out.println(text);   //출력되는지 콘솔에 테스트
                     writer.println(text);// 텍스트를 서버로 전송
-                    textField.setText(""); // 텍스트 필드의 값을 지움
+                    textmsg.setText(""); // 텍스트 필드의 값을 지움
                 }
             }
 
@@ -86,7 +81,8 @@ public class ChatGui extends JFrame {
         try {
             // text값 소켓통신으로 서버로 전송하는 코드
             // 서버 정보
-            String serverIP = "192.168.0.17";
+            String serverIP = "localhost";
+            //String serverIP = "192.168.0.17";
             int serverPort = 8888; // 서버 포트 번호
 
             // 서버에 연결
@@ -106,7 +102,7 @@ public class ChatGui extends JFrame {
         }
 
     }
-    public void updateText(String message) {textArea.append(message + "\n");}
+    public void updateText(String message) {chatlog.append(message + "\n");}
 
     private class ServerMessageReader implements Runnable {
         @Override
