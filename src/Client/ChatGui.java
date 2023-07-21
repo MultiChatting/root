@@ -11,8 +11,8 @@ import java.net.Socket;
 public class ChatGui extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textmsg;   //textmsg
-    private TextArea chatlog;  //textArea
+    private JTextField textmsg;
+    private TextArea chatlog;
     private BufferedReader reader;
     public PrintWriter writer;
 
@@ -21,6 +21,7 @@ public class ChatGui extends JFrame {
 //        ChatGui frame = new ChatGui();
 //    }
 
+    //GUI 구현
     public ChatGui(String id) {
         String msg = "login/" + id;
 
@@ -102,8 +103,11 @@ public class ChatGui extends JFrame {
         }
 
     }
+
+    //받은 메세지 채팅창에 업로드
     public void updateText(String message) {chatlog.append(message + "\n");}
 
+    //서버에서 읽은 메세지 처리
     private class ServerMessageReader implements Runnable {
         @Override
         public void run() {
