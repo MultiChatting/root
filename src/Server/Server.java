@@ -2,8 +2,8 @@ package Server;
 
 import Model.User;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,27 +29,17 @@ public class Server {
             serverGui = new ServerGui();
 
             //GUI에 이벤트 추가
-            serverGui.chatTextField.addKeyListener(new KeyListener() {
-                @Override
-                public void keyTyped(KeyEvent e) {
-
-                }
-
+            serverGui.chatTextField.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER){
-                        String s = serverGui.getChatMessage().trim();// 앞뒤 공백제거
-                        if(!s.isEmpty()){ // 비어있지 않은 경우에만 추가
-                            serverGui.appendMessage("SERVER : " + s);
-                            sendToAll("server : " + s);
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        String s = serverGui.getChatMessage().trim();
+                        if (!s.isEmpty()) {
+                            serverGui.appendMessage("SERVER: " + s);
+                            sendToAll("server: " + s);
                         }
                         serverGui.setTextFieldBlank();
                     }
-                }
-
-                @Override
-                public void keyReleased(KeyEvent e) {
-
                 }
             });
 
