@@ -16,20 +16,20 @@ import java.net.Socket;
 
 public class EnterGui extends JFrame {
 
-    private JPanel contentPane; // 이벤트 처리
-    private JTextField textField; // 이벤트 처리
-    private JButton btnNewButton; // 이벤트 처리
-    private String name; // 값 반환
+    private JPanel contentPane; // 전체틀 생성
+    private JTextField textField; // 닉네임 읽어오는 텍스트 필드
+    private JButton btnNewButton; // 입력 버튼 이벤트 처리
+    private String name; // 닉네임
 
 
     /**
      * Create the frame.
      */
     public EnterGui() {
-        windowPanel();
-        nickName();
-        enterButton();
-        setVisible(true);
+        windowPanel(); // 전체틀 생성
+        nickName(); // 닉네임 입력 라벨, 텍스트 필드 생성
+        enterButton(); // 입장 버튼 생성 및 처리
+        setVisible(true); // Gui 켜기
 
     }
 
@@ -55,7 +55,7 @@ public class EnterGui extends JFrame {
         contentPane.add(textField);
         textField.setColumns(10);
 
-        // 엔터 입장 처리
+        // 엔터 입력시 입장 처리
         textField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -63,10 +63,11 @@ public class EnterGui extends JFrame {
             }
             @Override
             public void keyPressed(KeyEvent e) {
+                // 엔터키 입력시 처리
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    name = textField.getText();
-                    setVisible(false);
-                    new ChatGui(name);
+                    name = textField.getText(); // 닉네임 name 읽어오기
+                    setVisible(false); // EnterGui 창 끄기
+                    new ChatGui(name); // ChatGui에 닉네임 name 값 전달
                 }
             }
 
@@ -81,12 +82,11 @@ public class EnterGui extends JFrame {
     public void enterButton() {
         btnNewButton = new JButton("입장");
         btnNewButton.addActionListener(new ActionListener() {
-            // 버튼 클릭처리
+            // 입장 버튼 클릭처리
             public void actionPerformed(ActionEvent e) {
-
-                name = textField.getText();
-                setVisible(false);
-                new ChatGui(name);
+                name = textField.getText(); // 닉네임 name 읽어오기
+                setVisible(false); // EnterGui 창 끄기
+                new ChatGui(name); // ChatGui에 닉네임 name 값 전달
             }
         });
         btnNewButton.setBounds(165, 134, 97, 23);
