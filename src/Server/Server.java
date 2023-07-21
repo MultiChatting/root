@@ -60,8 +60,8 @@ public class Server {
             // 여러 클라이언트 연결 대기
             while (true) {
                 clientSocket = serverSocket.accept();
-                ChatThread chatthread = new ChatThread();
-                chatlist.add(chatthread);
+                ChatThread chatthread = new ChatThread(); // 스레드 생성
+                chatlist.add(chatthread);  // 어레이 리스트에 스레드 추가
                 serverGui.appendMessage("클라이언트가 연결됐습니다." + "(IP : " + clientSocket.getInetAddress().toString().substring(1) + ")");
                 chatthread.start();
             }
@@ -99,7 +99,7 @@ public class Server {
                 //클라이언트로부터 메세지를 반복해서 읽어옴
                 while (loginBool) {
                     msg = reader.readLine();
-                    rmsg = msg.split("/");
+                    rmsg = msg.split("/");  // 구분자를 기준으로 나누기(login/id)
 
                     serverGui.appendMessage(user.getId() + " : " + msg);
 
@@ -110,7 +110,7 @@ public class Server {
                     } else if (msg.equals(".quit")) { //로그아웃 처리
                         sendToAll("server : " + user.getId() + "님이 나갔습니다");
                         serverGui.appendMessage(user.getId() + "님이 나갔습니다");
-                        loginBool = false;
+                        loginBool = false; // 클라이언트가 .quit을 치면 나감
                     } else {
                         sendToAll(user.getId() + " : " + msg); // 모든 클라이언트에 클라이언트의 메세지 전송
                     }
