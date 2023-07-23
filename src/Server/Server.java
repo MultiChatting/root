@@ -91,6 +91,11 @@ public class Server {
                     msg = reader.readLine();
                     rmsg = msg.split("/");  // 구분자를 기준으로 나누기(login/id)
 
+                    if(new BlacklistedWord().containBlacklistedWord(msg)){ // 욕설 처리
+                        sendToAll("server : 부적절한 단어 입니다 바른말을 써주세요.");
+                        continue;
+                    }
+
                     serverGui.appendMessage(user.getId() + " : " + msg);
 
                     if (rmsg[0].equals("login")) { //로그인 처리
