@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BlacklistedWord {
 
-    private final List<String> blacklistedWords = Arrays.asList("시발", "새끼");
+    private final List<String> blacklistedWords = Arrays.asList("시발", "병신", "개새끼");
     public BlacklistedWord(){
     }
 
