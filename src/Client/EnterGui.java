@@ -1,30 +1,21 @@
 package Client;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.*;
-import java.net.Socket;
 
 public class EnterGui extends JFrame {
-
     private JPanel enterPane; // 전체틀 생성
     private JTextField textField; // 닉네임 읽어오는 텍스트 필드
-    private JButton enterButton; // 입력 버튼 이벤트 처리
+    private JButton enterButton; // 입력 버튼
     private String name; // 닉네임
 
-
-    /**
-     * Create the frame.
-     */
     public EnterGui() {
         enterPanel(); // 전체틀 생성
         nickNameLabel(); // 닉네임 입력 라벨, 텍스트 필드 생성
@@ -69,7 +60,6 @@ public class EnterGui extends JFrame {
         textField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
             @Override
             public void keyPressed(KeyEvent e) {
@@ -81,7 +71,6 @@ public class EnterGui extends JFrame {
 
             @Override
             public void keyReleased(KeyEvent e) {
-
             }
         });
     }
@@ -91,5 +80,4 @@ public class EnterGui extends JFrame {
         setVisible(false); // EnterGui 창 끄기
         new ChatGui(name); // ChatGui에 닉네임 name 값 전달
     }
-
 }
