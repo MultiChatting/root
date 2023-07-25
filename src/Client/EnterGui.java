@@ -16,9 +16,9 @@ import java.net.Socket;
 
 public class EnterGui extends JFrame {
 
-    private JPanel contentPane; // 전체틀 생성
+    private JPanel enterPane; // 전체틀 생성
     private JTextField textField; // 닉네임 읽어오는 텍스트 필드
-    private JButton btnNewButton; // 입력 버튼 이벤트 처리
+    private JButton enterButton; // 입력 버튼 이벤트 처리
     private String name; // 닉네임
 
 
@@ -26,34 +26,46 @@ public class EnterGui extends JFrame {
      * Create the frame.
      */
     public EnterGui() {
-        windowPanel(); // 전체틀 생성
-        nickName(); // 닉네임 입력 라벨, 텍스트 필드 생성
-        enterButton(); // 입장 버튼 생성 및 처리
+        enterPanel(); // 전체틀 생성
+        nickNameLabel(); // 닉네임 입력 라벨, 텍스트 필드 생성
+        enterButtonEvent(); // 입장 버튼 생성 및 처리
         setVisible(true); // Gui 켜기
 
     }
 
-    public void windowPanel() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 패널 닫는 코드?
+    public void enterPanel() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 패널 닫는 코드
         setBounds(100, 100, 450, 300); // 패널 사이즈 코드
-        contentPane = new JPanel();
-        contentPane.setBackground(SystemColor.info);
-        contentPane.setForeground(new Color(255, 255, 255));
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        enterPane = new JPanel();
+        enterPane.setBackground(new Color(120, 255, 255));
+        enterPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        setContentPane(enterPane);
+        enterPane.setLayout(null);
     }
 
-    public void nickName() {
-        JLabel jlblNewLabel = new JLabel("닉네임 입력");
-        jlblNewLabel.setBounds(180, 59, 80, 15);
-        contentPane.add(jlblNewLabel);
+    public void nickNameLabel() {
+        JLabel nickName = new JLabel("닉네임 입력");
+        nickName.setBounds(180, 60, 80, 15);
+        enterPane.add(nickName);
 
         textField = new JTextField();
-        textField.setBounds(155, 76, 116, 21);
-        contentPane.add(textField);
-        textField.setColumns(10);
+        textField.setBounds(155, 75, 115, 20);
+        enterPane.add(textField);
+        textField.setColumns(10); // 글자수 제한
+    }
+
+
+    public void enterButtonEvent() {
+        enterButton = new JButton("입장");
+        enterButton.addActionListener(new ActionListener() {
+            // 입장 버튼 클릭시 이벤트 처리
+            public void actionPerformed(ActionEvent e) {
+                sendToChatGui();
+            }
+        });
+        enterButton.setBounds(165, 134, 97, 23);
+        enterPane.add(enterButton);
 
         // 엔터 입력시 입장 처리
         textField.addKeyListener(new KeyListener() {
@@ -63,11 +75,9 @@ public class EnterGui extends JFrame {
             }
             @Override
             public void keyPressed(KeyEvent e) {
-                // 엔터키 입력시 처리
+                // 엔터키 입력시 이벤트 처리
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    name = textField.getText(); // 닉네임 name 읽어오기
-                    setVisible(false); // EnterGui 창 끄기
-                    new ChatGui(name); // ChatGui에 닉네임 name 값 전달
+                    sendToChatGui();
                 }
             }
 
@@ -78,20 +88,10 @@ public class EnterGui extends JFrame {
         });
     }
 
-
-    public void enterButton() {
-        btnNewButton = new JButton("입장");
-        btnNewButton.addActionListener(new ActionListener() {
-            // 입장 버튼 클릭처리
-            public void actionPerformed(ActionEvent e) {
-                name = textField.getText(); // 닉네임 name 읽어오기
-                setVisible(false); // EnterGui 창 끄기
-                new ChatGui(name); // ChatGui에 닉네임 name 값 전달
-            }
-        });
-        btnNewButton.setBounds(165, 134, 97, 23);
-        contentPane.add(btnNewButton);
+    public void sendToChatGui() {
+        name = textField.getText(); // 닉네임 name 읽어오기
+        setVisible(false); // EnterGui 창 끄기
+        new ChatGui(name); // ChatGui에 닉네임 name 값 전달
     }
-
 
 }
