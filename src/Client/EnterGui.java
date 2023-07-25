@@ -34,12 +34,10 @@ public class EnterGui extends JFrame {
     }
 
     public void enterPanel() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 패널 닫는 코드
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창 종료시 프로세스 종료시키는 코드
         setBounds(100, 100, 450, 300); // 패널 사이즈 코드
         enterPane = new JPanel();
-        enterPane.setBackground(new Color(120, 255, 255));
-        enterPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+        enterPane.setBackground(new Color(128, 255, 255));
         setContentPane(enterPane);
         enterPane.setLayout(null);
     }
