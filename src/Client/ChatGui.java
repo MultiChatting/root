@@ -10,80 +10,66 @@ import java.net.Socket;
 
 public class ChatGui extends JFrame {
 
-    private JPanel contentPane;
-    private JTextField textmsg;
-    private TextArea chatlog;
+    private JPanel chatPanel;
+    private JTextField textMsg;
+    private TextArea chatLog;
     private BufferedReader reader;
     public PrintWriter writer;
 
-
-//    public static void main(String[] args) throws IOException {
-//        ChatGui frame = new ChatGui();
-//    }
-
-    //GUI 구현
+    //ChatGui 구현
     public ChatGui(String id) {
+        // EnterGui에서 보내는 닉네임 값을 매개변수로 받음
         String msg = "login/" + id;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 550, 500);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        chatPanel = new JPanel();
+        chatPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(chatPanel);
+        chatPanel.setBackground(new Color(128, 255, 255));
+        chatPanel.setLayout(null);
 
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(128, 255, 255));
-        panel.setBounds(0, 0, 685, 460);
-        contentPane.add(panel);
-        panel.setLayout(null);
+        // chatLabel과 chatLog
+        JLabel chatLabel = new JLabel("채팅방"); // chatLabel 생성
+        chatLabel.setBounds(240, 10, 95, 15);
+        chatPanel.add(chatLabel);
 
-        JLabel lblNewLabel = new JLabel("채팅방");
-        lblNewLabel.setBounds(240, 10, 97, 15);
-        panel.add(lblNewLabel);
+        chatLog = new TextArea(); // chatLog 생성
+        chatLog.setEditable(false);
+        chatLog.setText("채팅 로그입니다.");
+        chatLog.setBounds(10, 25, 500, 400);
+        chatPanel.add(chatLog);
 
-        chatlog = new TextArea();
-        chatlog.setEditable(false);
-        chatlog.setText("채팅 로그입니다.");
-        chatlog.setBounds(12, 26, 510, 393);
-        panel.add(chatlog);
+        textMsg = new JTextField();
+        textMsg.setText("메세지를 입력하세요");
+        textMsg.setBounds(10, 430, 510, 20);
+        chatPanel.add(textMsg);
+        textMsg.setColumns(10);
 
-        textmsg = new JTextField();
-        textmsg.setText("메세지를 입력하세요");
-        textmsg.setBounds(12, 429, 510, 21);
-        panel.add(textmsg);
-        textmsg.setColumns(10);
-        //엔터키 이벤트 처리
-        textmsg.addKeyListener(new KeyListener() {
+//        메세지 전송 엔터키 이벤트 처리
+        textMsg.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
-
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     //엔터키 눌렸을때 실행될 코드
-                    String text = textmsg.getText();
-                    //System.out.println(text);   //출력되는지 콘솔에 테스트
+                    String text = textMsg.getText();
                     writer.println(text);// 텍스트를 서버로 전송
-                    textmsg.setText(""); // 텍스트 필드의 값을 지움
+                    textMsg.setText(""); // 텍스트 필드의 값 지움 => 초기화
                 }
             }
-
             @Override
             public void keyReleased(KeyEvent e) {
-
             }
         });
-
         setVisible(true);
-
         try {
-            // text값 소켓통신으로 서버로 전송하는 코드
+            // 소켓통신으로 서버로 메세지 전송하는 코드
             // 서버 정보
             String serverIP = "localhost";
-            //String serverIP = "192.168.0.17";
+//            String serverIP = "192.168.0.17";
             int serverPort = 8888; // 서버 포트 번호
 
             // 서버에 연결
@@ -94,7 +80,7 @@ public class ChatGui extends JFrame {
             Thread readThread = new Thread(new ServerMessageReader());
             readThread.start();
 
-            // 서버로 데이터 전송
+            // 서버로 메세지 전송
             OutputStream outputStream = socket.getOutputStream();
             writer = new PrintWriter(outputStream, true);
             writer.println(msg);
@@ -104,10 +90,7 @@ public class ChatGui extends JFrame {
 
     }
 
-    //받은 메세지 채팅창에 업로드
-    public void updateText(String message) {chatlog.append(message + "\n");}
-
-    //서버에서 읽은 메세지 처리
+    //서버에서 주는 메세지 처리
     private class ServerMessageReader implements Runnable {
         @Override
         public void run() {
@@ -115,8 +98,7 @@ public class ChatGui extends JFrame {
                 String message;
                 while ((message = reader.readLine()) != null) {
                     System.out.println("서버로부터 메시지: " + message);
-                    //textArea.append(message + "\n");
-                    updateText(message);
+                    uploadText(message);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -124,4 +106,8 @@ public class ChatGui extends JFrame {
         }
     }
 
+    //받은 메세지 채팅창에 업로드
+    public void uploadText(String message) {
+        chatLog.append(message + "\n");
+    }
 }

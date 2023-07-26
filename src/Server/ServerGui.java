@@ -51,7 +51,7 @@ public class ServerGui {
         contentPane.add(list);
 
         serverFrame.setResizable(false);
-        serverFrame.setTitle("진짜 채팅프로그램 서버");
+        serverFrame.setTitle("채팅프로그램 서버");
         serverFrame.setVisible(true);
 
 
