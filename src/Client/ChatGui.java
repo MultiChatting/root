@@ -42,7 +42,7 @@ public class ChatGui extends JFrame {
 
         textMsg = new JTextField();
         textMsg.setText("메세지를 입력하세요");
-        textMsg.setBounds(183, 430, 500, 20);
+        textMsg.setBounds(18, 430, 500, 20);
         chatPanel.add(textMsg);
         textMsg.setColumns(10);
 
