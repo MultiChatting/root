@@ -37,12 +37,12 @@ public class ChatGui extends JFrame {
         chatLog = new TextArea(); // chatLog 생성
         chatLog.setEditable(false);
         chatLog.setText("채팅 로그입니다.");
-        chatLog.setBounds(10, 25, 500, 400);
+        chatLog.setBounds(18, 25, 500, 400);
         chatPanel.add(chatLog);
 
         textMsg = new JTextField();
         textMsg.setText("메세지를 입력하세요");
-        textMsg.setBounds(10, 430, 510, 20);
+        textMsg.setBounds(183, 430, 500, 20);
         chatPanel.add(textMsg);
         textMsg.setColumns(10);
 
